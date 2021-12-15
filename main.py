@@ -5,18 +5,6 @@ Généralisation. On vous demande maintenant d'écrire un programme qui fonction
 from turtle import *
 import time
 
-def ask_object():
-    object_list = []
-    nb_objets = int(input("Combien d'objets : "))
-    for i in range(nb_objets):
-        x_pos = int(input("Position en x : "))
-        y_pos = int(input("Position en y : "))
-        type_object = input("Type d'objet : ")
-        cotes_polygone = int(input("Nombres de cotes de la forme : "))
-        discover = int(input("Discovered (0 or 1) : "))
-        object_list.append([x_pos, y_pos, type_object, cotes_polygone,discover])
-    return object_list
-
 def make_figure(objects,tc):
     nombre_case = len(objects)
     for i in range(nombre_case):
@@ -24,6 +12,7 @@ def make_figure(objects,tc):
             dessineCase(objects[i][0], objects[i][1],100,i,tc,"red")
         else:
             polygone(objects[i][0], objects[i][1],objects[i][3], tc ,100)
+
 def polygone(x, y, nbcotes, t, taille):
     t.up()
     t.goto(x, y)
@@ -58,7 +47,7 @@ def dessineCase(x,y,l,n,t,c="blue"):
 def game():
     play = 1
     tracer(0)
-    objects = ask_object() 
+    objects = [[],[],[],[],[],[],[],[],[],[],[],[]] 
     t_case = Turtle()
     make_figure(objects, t_case)
     i = len(objects)
@@ -80,6 +69,6 @@ def game():
                 objects[choix][4] = 1
                 objects[choix2][4] = 1
                 make_figure(objects, t_case)
-            time.sleep(3) 
+            time.sleep(3)
         play = int(input("Tu veux rejouer ?? : "))
 game()
