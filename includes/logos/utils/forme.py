@@ -24,19 +24,16 @@ def tri_carre(x,y,t=Turtle()):
         x_base = x
         for i in range(3):
                 carre(x,y,t)
-                print(x,y)
                 x += 0.42
         x = x_base
         y -= 0.7
         for i in range(3):
                 carre(x,y,t)
-                print(x,y)
                 x += 0.42
         x = x_base
         y -= 0.7
         for i in range(3):
                 carre(x,y,t)
-                print(x,y)
                 x += 0.42
         update()
 
@@ -59,4 +56,3 @@ def drawV(x,y,t,color):
         t.forward(85)
         t.left(135)
         t.forward(85)
-
