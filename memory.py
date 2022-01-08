@@ -2,15 +2,23 @@
 from turtle import *
 import time
 import random
-from includes.decor import * 
-from includes.logos.utils.forme import * 
+from decor import * 
+from forme import * 
+from logo import *
 
 p_choix = 0
 p_choix2 = 0
-clicked = 0
+clicked = 1
+niveau = 0
+tentative = 0
+objects = []
+t_case = Turtle(visible=False)
 
-def choose_objects(niveau):
-    nbobj = 0
+tracer(0)
+
+def choose_objects():
+    global niveau
+    nbpaire = 0
     if niveau == 1:
         global_coords = [] #6 coordonnées
         nbpaire = 3
@@ -35,17 +43,30 @@ def choose_objects(niveau):
         global_colors.remove(color)       
     return objects
 
+def drawLogos(x,y,l,type_objets,t,color):
+    if type_objets == "umbro":
+        umbro(x,y,10,t,color)
+    if type_objets == "gucci":
+        gucci(x,y,10,t,color)
+    if type_objets == "balenciaga":
+        balenciaga(x,y,10,t,color)
+    if type_objets == "lv":
+        lv(x,y,10,t,color)
+    if type_objets == "converse":
+        converse(x,y,10,t,color)
+    if type_objets == "offwhite":
+        offwhite(x,y,10,t,color)
+
 def make_figure(objects,tc):
     nombre_case = len(objects)
     for i in range(nombre_case):
         if objects[i][3] == 1:
             dessineCase(objects[i][0], objects[i][1],10,i,tc,"red")
         else:
-            pass
+            drawLogos(objects[i][0],objects[i][1],10,objects[i][2],tc,objects[i][4])
         update()
 
 def dessineCase(x,y,l,n,t,c="blue"):
-    tracer(0)
     t.up()
     t.goto(x,y)
     t.down()
@@ -93,35 +114,48 @@ def eventClick(x,y):
     global clicked
     global p_choix
     global p_choix2
-    onclick(None)
-    try :
-        niveau
-    except :
+    global niveau
+    global tentative
+    global objects
+    global t_case
+    global objects
+
+    print(clicked)
+    if niveau == 0:
         clearscreen()
-        niveau = base()
-        clearscreen()
-        t_case = Turtle(visible=False)
-        objects = choose_objects(niveau)
+        clicked = 1
+        p_choix = 0
+        niveau = int(textinput("Level Selection :", "Quel niveau (1,2,3) :"))
+        decor()
+        objects = choose_objects()
         make_figure(objects, t_case)
         tri_carre(96,77)
-        update()
+    else :
         if niveau == 1:
             tentative = 3
         if niveau == 2:
             tentative = 2
         if niveau == 3:
             tentative = 1
-    if p_choix == 0:
-        p_choix = [round(x,2), round(y,2)]
-    else:
-        p_choix2 = [round(x,2), round(y,2)]
-    if clicked == 2:
-        if tentative > 0:
-            objects = game(objects, niveau)
-            tentative -= 1
-    clicked += 1
+        if p_choix == 0:
+            p_choix = [round(x,2), round(y,2)]
+            print(p_choix)
+        else:
+            p_choix2 = [round(x,2), round(y,2)]
+            print(p_choix2)
+        if clicked == 2:
+                game()
+        clicked += 1
+    onscreenclick(eventClick)
 
-def game(objects,niveau): # Fonction pour jouer
+def game(): # Fonction pour jouer
+    global p_choix
+    global p_choix2
+    global clicked
+    global tentative
+    global objects
+    global t_case
+    onscreenclick(None)
     i = len(objects)
     score_p = 0
     choix, choix2 = player_play(objects,p_choix,p_choix2)
@@ -140,30 +174,20 @@ def game(objects,niveau): # Fonction pour jouer
         objects[choix][3] = 1
         objects[choix2][3] = 1
         make_figure(objects, t_case)
+        if tentative == 0:
+            bye()
     p_choix = 0
     p_choix2 = 0
+    clicked = 1
     update()
-    return objects
+    onscreenclick(eventClick)
 
-def base():
-    bgcolor("black")
-    up()
-    goto(50,92)
-    down()
-    color("white")
-    write('Level Selection !', font=('Arial', 43), align='center')
-    x = 20
-    for i in range(3):
-        carre(x, 50, Turtle(visible=False), "green")
-        x += 20
-    update()
-tracer(0)
 setup(0.99,0.99)
 setworldcoordinates(0, 0, 100, 100)
-onscreenclick(eventClick)
+tracer(0)
 up()
 goto(50,50)
-down()
+down()    
 write("CLICK ON THE SCREEN TO BEGIN THE GAME ! ", font=('Arial', 43), align='center')
-update()
+onscreenclick(eventClick)
 done()
