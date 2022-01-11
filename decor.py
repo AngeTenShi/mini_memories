@@ -12,6 +12,9 @@ def carré(c,turtle):
         turtle.forward(9)
 
 def sneakers(x,y,ct,turtle):
+    turtle.up()
+    turtle.goto(x,y)
+    turtle.down()
     tracer(0)
     turtle.up()
     turtle.forward(4*ct)
@@ -284,79 +287,74 @@ def decor():
     t = Turtle(visible=False)
     tracer(0)
     #---------------------------BARRE DE MENU--------------------------------------#
-    x_base = 1
-    y_base = 91
+    x_base = 8
+    y_base = 650
     t.up()
     t.goto (x_base,y_base)
     t.color("green")
     t.write("Stock X", font=("Futura", 40, "bold"))
-    x_base += 55
-    y_base += 1.5
+    x_base += 560
+    y_base += 13
     t.goto(x_base,y_base)
     t.color("black")
     t.write("Browse", font=("Arial", 20, "normal"))
-    x_base += 7.5
+    x_base += 125
     t.goto(x_base,y_base)
     t.write("News", font=("Arial", 20, "normal"))
-    x_base += 5.7
+    x_base += 100
     t.goto(x_base,y_base)
     t.write("About", font=("Arial", 20, "normal"))
-    x_base += 6.5
+    x_base += 105
     t.goto(x_base,y_base)
     t.write("Help", font=("Arial", 20, "normal"))
-    x_base += 5.7
+    x_base += 87
     t.goto(x_base,y_base)
     t.write("Login", font=("Arial", 20, "normal"))
-    x_base += 6
+    x_base += 95
     t.goto(x_base,y_base)
     t.write("Sign up", font=("Arial", 20, "normal"))
-    x_base += 7.5
+    x_base += 120
     t.goto(x_base,y_base)
     t.write("Sell", font=("Arial", 20, "normal"))
     #---------------------------TRAIT INTERMEDIAIRE--------------------------------------#
-    t.goto (-5, 88)
+    t.up()
+    t.goto (-80, 640)
     t.color("grey")
     t.down()
-    t.goto(102,88)
+    t.goto(1500,640)
     #---------------------------HEADER GAUCHE--------------------------------------------#
-    x_base = 3.5
-    y_base = 77
+    x_base = 44.8
+    y_base = 550
     t.up()
     t.goto (x_base,y_base)
     t.color ("black")
     t.write("SNEAKERS", font=("Arial", 23, "bold"))
-    y_base -= 5
+    y_base -= 50
     t.goto (x_base,y_base)
     t.write("STREETWEAR", font=("Arial", 23, "bold"))
-    y_base -= 5
+    y_base -= 50
     t.goto (x_base,y_base)
     t.write("ELECTRONICS", font=("Arial", 23, "bold"))
-    y_base -= 5
+    y_base -= 50
     t.goto (x_base,y_base)
     t.write("TRADING CARDS", font=("Arial", 23, "bold"))
-    y_base -= 5
+    y_base -= 50
     t.goto (x_base,y_base)
     t.write("COLLECTIBLES", font=("Arial", 23, "bold"))
-    y_base -= 5
+    y_base -= 50
     t.goto (x_base,y_base)
     t.write("HANDBAGS", font=("Arial", 23, "bold"))
-    y_base -= 5
+    y_base -= 50
     t.goto (x_base,y_base)
     t.write("WATCHES", font=("Arial", 23, "bold"))
-    y_base -= 10
-    t.goto (x_base,y_base)
-    t.write("BELOW RETAIL", font=("Arial", 23, "bold"))
+    
     #---------------------------ZONE CENTRALE--------------------------------------------#
-    x_base += 32
-    y_base = 77
-    t.goto(x_base,77)
+    x_base += 410
+    y_base = 580
+    t.goto(x_base,y_base)
     t.write("Home/ Search/ Marques de Sneakers ", font=("Arial", 14))
-    t.goto(x_base, y_base - 5)
-    t.write("Parcourir ", font=("Arial", 18))
-    t.setx(x_base + 5.5)
-    t.write("les ", font=("Arial", 18, "bold"))
-    t.setx(x_base + 7)
-    t.write(" résultats pour \"Marques de sneakers\"", font=("Arial", 18))
+    t.goto(x_base, y_base - 40)
+    t.write("Parcourir les résultats pour \"Marques de sneakers\" ", font=("Arial", 18))
     #------------------------SNEAKERS-----------------------------------------------------#
-    #sneakers(0, 0, 9, Turtle(visible=False))
+    sneakers(0, 0, 9, Turtle(visible=False))
     update()

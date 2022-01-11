@@ -61,9 +61,10 @@ def make_figure(objects,tc):
     nombre_case = len(objects)
     for i in range(nombre_case):
         if objects[i][3] == 1:
-            dessineCase(objects[i][0], objects[i][1],10,i,tc,"red")
+            #dessineCase(objects[i][0], objects[i][1],10,i,tc,"red")
+            pass
         else:
-            drawLogos(objects[i][0],objects[i][1],10,objects[i][2],tc,objects[i][4])
+            dessineCase(objects[i][0], objects[i][1],10,i,tc,"blue")
         update()
 
 def dessineCase(x,y,l,n,t,c="blue"):
@@ -99,8 +100,9 @@ def match_coords_with_index(objects,p_choix):
     x = 0
     y = 0
     for i in range(len(objects)):
-        x_tab.append(objects[i][0])
-        y_tab.append(objects[i][1])
+        if objects[i][3] == 1:
+            x_tab.append(objects[i][0])
+            y_tab.append(objects[i][1])
     x = min(x_tab, key=lambda val:abs(val - p_choix[0]))
     y = min(y_tab, key=lambda val:abs(val - p_choix[1]))
     print(f"Valeur de x : {x}") #DEBUG
@@ -120,16 +122,13 @@ def eventClick(x,y):
     global t_case
     global objects
 
-    print(clicked)
     if niveau == 0:
         clearscreen()
-        clicked = 1
         p_choix = 0
         niveau = int(textinput("Level Selection :", "Quel niveau (1,2,3) :"))
         decor()
         objects = choose_objects()
         make_figure(objects, t_case)
-        tri_carre(96,77)
     else :
         if niveau == 1:
             tentative = 3
@@ -137,12 +136,13 @@ def eventClick(x,y):
             tentative = 2
         if niveau == 3:
             tentative = 1
-        if p_choix == 0:
-            p_choix = [round(x,2), round(y,2)]
-            print(p_choix)
-        else:
-            p_choix2 = [round(x,2), round(y,2)]
-            print(p_choix2)
+        if clicked > 0:
+            if p_choix == 0:
+                p_choix = [round(x,2), round(y,2)]
+                print(p_choix)
+            else:
+                p_choix2 = [round(x,2), round(y,2)]
+                print(p_choix2)
         if clicked == 2:
                 game()
         clicked += 1
@@ -152,7 +152,7 @@ def game(): # Fonction pour jouer
     global p_choix
     global p_choix2
     global clicked
-    global tentative
+    global x
     global objects
     global t_case
     onscreenclick(None)
@@ -178,16 +178,16 @@ def game(): # Fonction pour jouer
             bye()
     p_choix = 0
     p_choix2 = 0
-    clicked = 1
+    clicked = 0
     update()
     onscreenclick(eventClick)
 
-setup(0.99,0.99)
-setworldcoordinates(0, 0, 100, 100)
+setup(1280,720)
+setworldcoordinates(0, 0, 1280, 720)
 tracer(0)
 up()
 goto(50,50)
 down()    
-write("CLICK ON THE SCREEN TO BEGIN THE GAME ! ", font=('Arial', 43), align='center')
+write("CLICK ON THE SCREEN TO BEGIN THE GAME ! ", font=('Arial', 40), align='center')
 onscreenclick(eventClick)
 done()

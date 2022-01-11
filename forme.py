@@ -13,30 +13,6 @@ def carre(x,y,t,color="black"):
                 update()
         t.end_fill()
 
-def tri_carre(x,y,t=Turtle()):
-        t.hideturtle()
-        t.up()
-        t.goto(x,y)
-        t.down()
-        t.setheading(0)
-        t.color("black")
-        t.width(1)
-        x_base = x
-        for i in range(3):
-                carre(x,y,t)
-                x += 0.42
-        x = x_base
-        y -= 0.7
-        for i in range(3):
-                carre(x,y,t)
-                x += 0.42
-        x = x_base
-        y -= 0.7
-        for i in range(3):
-                carre(x,y,t)
-                x += 0.42
-        update()
-
 def drawL(x,y,t,color):
         t.up()
         t.goto(x,y)
