@@ -13,20 +13,21 @@ niveau = 0
 tentative = 0
 objects = []
 t_case = Turtle(visible=False)
-
+t_progressbar = Turtle(visible=False)
+tentative_total = 0
 tracer(0)
 
 def choose_objects():
     global niveau
     nbpaire = 0
     if niveau == 1:
-        global_coords = [] #6 coordonnées
+        global_coords = [[500,500],[750,500],[1000,500],[500,300],[750,300],[1000,300]] #6 coordonnées
         nbpaire = 3
     if niveau == 2:
-        global_coords = [] # 8 coordonées
+        global_coords = [[455,500],[655,500],[855,500],[1055,500],[455,300],[655,300],[855,300],[1055,300]] # 8 coordonées
         nbpaire = 4
     if niveau == 3:
-        global_coords = [[35,50],[52,50],[68,50],[85,50],[35,26],[52,26],[68,26],[85,26],[35,2],[52,2],[68,2],[85,2]] # 12 coordonnées
+        global_coords = [[455,520],[455,400],[455,280],[655,520],[655,400],[655,280],[855,520],[855,400],[855,280],[1055,520],[1055,400],[1055,280]] # 12 coordonnées
         nbpaire = 6
     global_objects = ['umbro','gucci','balenciaga','lv','converse','offwhite']
     global_colors = ['red','blue','green','grey','purple','black','pink']
@@ -61,32 +62,26 @@ def make_figure(objects,tc):
     nombre_case = len(objects)
     for i in range(nombre_case):
         if objects[i][3] == 1:
-            #dessineCase(objects[i][0], objects[i][1],10,i,tc,"red")
-            pass
+            dessineCase(objects[i][0], objects[i][1],50,tc,"green")
         else:
-            dessineCase(objects[i][0], objects[i][1],10,i,tc,"blue")
+            #drawLogos(objects[i][0], objects[i][1],50,objects[i][2],tc,"blue")
+            dessineCase(objects[i][0], objects[i][1],50,tc,"blue")
         update()
 
-def dessineCase(x,y,l,n,t,c="blue"):
+def dessineCase(x,y,l,t,c="blue"):
     t.up()
     t.goto(x,y)
     t.down()
     t.color(c)
+    t.setheading(0)
     t.begin_fill()
     for i in range(2):
-        t.forward(l+3)
-        t.left(90)
-        t.forward(l+7)
-        t.left(90)
+        t.forward(l*3)
+        t.right(90)
+        t.forward(l*2)
+        t.right(90)
         update()
     t.end_fill()
-    t.up()
-    t.goto(x+l/2-10,y+l/2-10)
-    t.down()
-    c=t.color()
-    t.color("white")
-    t.write(str(n),font=('Arial',14,'normal'))
-    t.color(c[0])
     update()
 
 def player_play(objects,p_choix,p_choix2):
@@ -105,12 +100,19 @@ def match_coords_with_index(objects,p_choix):
             y_tab.append(objects[i][1])
     x = min(x_tab, key=lambda val:abs(val - p_choix[0]))
     y = min(y_tab, key=lambda val:abs(val - p_choix[1]))
-    print(f"Valeur de x : {x}") #DEBUG
-    print(f"Valeur de y : {y}") #DEBUG
     for i in range(len(objects)):
         if objects[i][0] == x and objects[i][1] == y:
             p_index = i
     return p_index
+
+def printCoords(x,y):
+    print(f"x : {int(x)}, y : {int(y)}")
+
+def decor_click(x,y):
+    clearscreen()
+    decor()
+    panier(1180,10,Turtle(visible=True))
+    onscreenclick(printCoords)
 
 def eventClick(x,y):
     global clicked
@@ -121,7 +123,7 @@ def eventClick(x,y):
     global objects
     global t_case
     global objects
-
+    global tentative_total
     if niveau == 0:
         clearscreen()
         p_choix = 0
@@ -129,13 +131,14 @@ def eventClick(x,y):
         decor()
         objects = choose_objects()
         make_figure(objects, t_case)
-    else :
         if niveau == 1:
-            tentative = 3
+            tentative = 40
         if niveau == 2:
-            tentative = 2
+            tentative = 30
         if niveau == 3:
-            tentative = 1
+            tentative = 4
+        tentative_total = tentative
+    else :
         if clicked > 0:
             if p_choix == 0:
                 p_choix = [round(x,2), round(y,2)]
@@ -152,14 +155,21 @@ def game(): # Fonction pour jouer
     global p_choix
     global p_choix2
     global clicked
-    global x
+    global tentative
     global objects
     global t_case
+    global t_progressbar
+    global tentative_total
     onscreenclick(None)
     i = len(objects)
     score_p = 0
     choix, choix2 = player_play(objects,p_choix,p_choix2)
     t_case.clear()
+    if tentative == 0:
+        update_progressbar(tentative * 100 // tentative_total ,t_progressbar)
+        onscreenclick(None)
+        time.sleep(500)
+        bye()
     if objects[choix][2] == objects[choix2][2]:
         objects[choix][3] = 0
         objects[choix2][3] = 0
@@ -174,8 +184,8 @@ def game(): # Fonction pour jouer
         objects[choix][3] = 1
         objects[choix2][3] = 1
         make_figure(objects, t_case)
-        if tentative == 0:
-            bye()
+        tentative -= 1
+    update_progressbar(tentative * 100 // tentative_total ,t_progressbar)
     p_choix = 0
     p_choix2 = 0
     clicked = 0
@@ -186,7 +196,7 @@ setup(1280,720)
 setworldcoordinates(0, 0, 1280, 720)
 tracer(0)
 up()
-goto(50,50)
+goto(640,360)
 down()    
 write("CLICK ON THE SCREEN TO BEGIN THE GAME ! ", font=('Arial', 40), align='center')
 onscreenclick(eventClick)

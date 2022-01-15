@@ -1,6 +1,24 @@
 # ANGE ET PAUL
 from turtle import *
 
+def update_progressbar(tentative_pourcentage,t):
+    t.clear()
+    t.up()
+    t.goto(271,703)
+    t.down()
+    t.setheading(0)
+    t.color("green")
+    t.begin_fill()
+    t.forward(268 - (tentative_pourcentage * 268 // 100))
+    t.right(90)
+    t.forward(48)
+    t.right(90)
+    t.forward(268 - (tentative_pourcentage * 268 // 100)) 
+    t.right(90)
+    t.forward(48)
+    t.end_fill()
+    update()
+
 def carré(c,turtle):
         turtle.color(c)
         turtle.fillcolor(c)
@@ -11,7 +29,7 @@ def carré(c,turtle):
         turtle.end_fill()
         turtle.forward(9)
 
-def sneakers(x,y,ct,turtle):
+def sneakers(x,y,ct,turtle,color=color):
     turtle.up()
     turtle.goto(x,y)
     turtle.down()
@@ -20,16 +38,16 @@ def sneakers(x,y,ct,turtle):
     turtle.forward(4*ct)
     turtle.down()
     for i in range(24):
-        carré("red",turtle)
+        carré(color,turtle)
     turtle.up()    
-    turtle.goto(0,ct)
+    turtle.goto(x,ct)
     turtle.down()
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(24):
         carré("white",turtle)
     turtle.up()
-    turtle.goto(0,2*ct)
+    turtle.goto(x,2*ct)
     turtle.down()
     for i in range(5):
         carré("white",turtle)
@@ -37,36 +55,36 @@ def sneakers(x,y,ct,turtle):
         carré("grey",turtle)
 
     turtle.up()
-    turtle.goto(0,3*ct)
+    turtle.goto(x,3*ct)
     turtle.down()
     for i in range(5):
         carré("grey",turtle)
     for i in range(10):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(7):
         carré("white",turtle)
     for i in range(6):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,4*ct)
+    turtle.goto(x,4*ct)
     turtle.down()
     for i in range(14):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(8):
         carré("white",turtle)
     for i in range(6):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,5*ct)
+    turtle.goto(x,5*ct)
     turtle.down()
     for i in range(8):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in  range(1):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(3):
         carré("white",turtle)
     for i in range(3):
@@ -74,15 +92,15 @@ def sneakers(x,y,ct,turtle):
     for i in range(4):
         carré("white",turtle)
     for i in range(5):
-        carré("red",turtle)
+        carré(color,turtle)
     turtle.up()
-    turtle.goto(0,6*ct)
+    turtle.goto(x,6*ct)
     turtle.forward(2*ct)
     turtle.down()
     for i in range(7):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(3):
         carré("white",turtle)
     for i in range(6):
@@ -90,16 +108,16 @@ def sneakers(x,y,ct,turtle):
     for i in range(1):
         carré("white",turtle)
     for i in range(5):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,7*ct)
+    turtle.goto(x,7*ct)
     turtle.forward(8*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(3):
         carré("white",turtle)
     for i in range(2):
@@ -109,16 +127,16 @@ def sneakers(x,y,ct,turtle):
     for i in range(3):
         carré("black",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,8*ct)
+    turtle.goto(x,8*ct)
     turtle.forward(10*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(2):
         carré("white",turtle)
     for i in range(1):
@@ -128,114 +146,114 @@ def sneakers(x,y,ct,turtle):
     for i in range(3):
         carré("black",turtle)
     for i in range(1):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(1):
         carré("white",turtle)
 
     turtle.up()
-    turtle.goto(0,9*ct)
+    turtle.goto(x,9*ct)
     turtle.forward(12*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(8):
         carré("white",turtle)
     for i in range(3):
         carré("black",turtle)
 
     turtle.up()
-    turtle.goto(0,10*ct)
+    turtle.goto(x,10*ct)
     turtle.forward(14*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(5):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(2):
         carré("white",turtle)
     for i in range(1):
         carré("black",turtle)
     for i in range(2):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(3):
         carré("white",turtle)
 
     turtle.up()
-    turtle.goto(0,11*ct)
+    turtle.goto(x,11*ct)
     turtle.forward(15*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(2):
         carré("black",turtle)
     for i in range(5):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,12*ct)
+    turtle.goto(x,12*ct)
     turtle.forward(16*ct)
     turtle.down()
     for i in range(2):
         carré("white",turtle)
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(3):
         carré("black",turtle)
     for i in range(2):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,13*ct)
+    turtle.goto(x,13*ct)
     turtle.forward(17*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(3):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(3):
         carré("black",turtle)
     for i in range(3):
-        carré("red",turtle)
+        carré(color,turtle)
 
     turtle.up()
-    turtle.goto(0,14*ct)
+    turtle.goto(x,14*ct)
     turtle.forward(17*ct)
     turtle.down()
     for i in range(4):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(1):
         carré("black",turtle)
     for i in range(3):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(2):
         carré("black",turtle)
 
     turtle.up()
-    turtle.goto(0,15*ct)
+    turtle.goto(x,15*ct)
     turtle.forward(17*ct)
     turtle.down()
     for i in range(1):
         carré("white",turtle)
     for i in range(5):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(4):
         carré("black",turtle)
 
     turtle.up()
-    turtle.goto(0,16*9)
+    turtle.goto(x,16*9)
     turtle.forward(17*9)
     turtle.down()
     for i in range(3):
-        carré("red",turtle)
+        carré(color,turtle)
     for i in range(4):
         carré("black",turtle)
 
     turtle.up()
-    turtle.goto(0,0)
+    turtle.goto(x,0)
     turtle.forward(4*ct)
     turtle.down()
     turtle.color("black")
@@ -285,7 +303,7 @@ def sneakers(x,y,ct,turtle):
 
 def decor():
     t = Turtle(visible=False)
-    tracer(0)
+    tracer(0.5)
     #---------------------------BARRE DE MENU--------------------------------------#
     x_base = 8
     y_base = 650
@@ -355,6 +373,23 @@ def decor():
     t.write("Home/ Search/ Marques de Sneakers ", font=("Arial", 14))
     t.goto(x_base, y_base - 40)
     t.write("Parcourir les résultats pour \"Marques de sneakers\" ", font=("Arial", 18))
+    
+    #-----------------------BARRE DE PROGRESSION------------------------------------------#
+    t.goto(270,704)
+    t.color("black")
+    t.setheading(0)
+    t.down()
+    t.width(2)
+    t.forward(270)
+    t.right(90)
+    t.forward(50)
+    t.right(90)
+    t.forward(270)
+    t.right(90)
+    t.forward(50)
+    update()
     #------------------------SNEAKERS-----------------------------------------------------#
-    sneakers(0, 0, 9, Turtle(visible=False))
+    sneakers(0, 0, 9, Turtle(visible=False),"red")
+    sneakers(400, 0, 9, Turtle(visible=False),"purple")
+    sneakers(800, 0, 9, Turtle(visible=False),"green")
     update()
