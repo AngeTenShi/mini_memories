@@ -34,7 +34,6 @@ def drawV(x,y,t,color):
         t.forward(85)
 
 def panier(x,y,t):
-        tracer(0)
         t.up()
         t.goto(x,y)
         t.down()

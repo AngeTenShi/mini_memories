@@ -19,6 +19,63 @@ def update_progressbar(tentative_pourcentage,t):
     t.end_fill()
     update()
 
+def stockx(x,y,c,t):
+    print("pass")
+    t.up()
+    t.goto(x,y)
+    t.down()
+    t.setheading(0)
+    t.fillcolor("green")
+    t.begin_fill()
+    t.right(59)
+    t.forward(c*50)
+    t.left(37)
+    t.forward(c*18)
+    t.left(144)
+    t.forward(c*51)
+    t.left(28)
+    t.goto(x,y)
+    t.end_fill()
+    t.right(150)#revenir etait initaile angle 0
+    t.up()
+    t.right(62.5)
+    t.forward(c*30.2)
+    t.down()
+    t.fillcolor("green")
+    t.begin_fill()
+    t.forward(c*10.3)
+    t.right(63)
+    t.forward(c*8.5)
+    t.right(38)
+    t.forward(c*18)
+    t.right(146)
+    t.forward(c*27.6)
+    t.end_fill()
+    t.up()
+    t.forward(c*11)
+    t.down()
+    t.fillcolor("green")
+    t.begin_fill()
+    t.up()
+    t.forward(c*2)
+    t.down()
+    t.forward(c*10.3)
+    t.left(129)
+    t.forward(c*4.2)
+    t.right(148)
+    t.forward(c*20.7)
+    t.right(123)
+    t.forward(c*11.8)
+    t.right(92)
+    t.forward(c*4.2)
+    t.left(62)
+    t.forward(c*17)
+    t.right(94)
+    t.forward(c*5.85)
+    t.right(23)
+    t.forward(c*5.35)
+    t.end_fill()
+
 def carré(c,turtle):
         turtle.color(c)
         turtle.fillcolor(c)
@@ -303,7 +360,7 @@ def sneakers(x,y,ct,turtle,color=color):
 
 def decor():
     t = Turtle(visible=False)
-    tracer(0.5)
+    tracer(0)
     #---------------------------BARRE DE MENU--------------------------------------#
     x_base = 8
     y_base = 650
@@ -388,6 +445,19 @@ def decor():
     t.right(90)
     t.forward(50)
     update()
+    #------------------------PETIT LOGO STOCKX--------------------------------------------#
+    x_base = 547
+    for i in range(15):
+        stockx(x_base,715,0.4,t)
+        x_base += 50
+        update()
+    stockx(547,690,0.4,t)
+    x_base = 547    
+    for i in range(15):
+        stockx(x_base,665,0.4,t)
+        x_base += 50
+        update()
+    stockx(x_base-48,690,0.4,t)
     #------------------------SNEAKERS-----------------------------------------------------#
     sneakers(0, 0, 9, Turtle(visible=False),"red")
     sneakers(400, 0, 9, Turtle(visible=False),"purple")

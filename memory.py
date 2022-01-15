@@ -6,15 +6,18 @@ from decor import *
 from forme import * 
 from logo import *
 
+
+#Initialisation des variables globales
 p_choix = 0
 p_choix2 = 0
 clicked = 1
 niveau = 0
 tentative = 0
 objects = []
-t_case = Turtle(visible=False)
+t_case = Turtle(visible=True)
 t_progressbar = Turtle(visible=False)
 tentative_total = 0
+
 tracer(0)
 
 def choose_objects():
@@ -46,34 +49,39 @@ def choose_objects():
 
 def drawLogos(x,y,l,type_objets,t,color):
     if type_objets == "umbro":
-        umbro(x,y,10,t,color)
+        umbro(x-15,y-47,10,t,color)
     if type_objets == "gucci":
-        gucci(x,y,10,t,color)
+        gucci(x,y-5,10,t,color)
     if type_objets == "balenciaga":
-        balenciaga(x,y,10,t,color)
+        balenciaga(x+100,y-45,10,t,color)
     if type_objets == "lv":
-        lv(x,y,10,t,color)
+        lv(x+40,y-10,10,t,color)
     if type_objets == "converse":
-        converse(x,y,10,t,color)
+        converse(x+10,y+20,10,t,color)
     if type_objets == "offwhite":
-        offwhite(x,y,10,t,color)
+        offwhite(x+35,y-103,10,t,color)
 
-def make_figure(objects,tc):
+def make_figure(objects):
+    global t_case
     nombre_case = len(objects)
     for i in range(nombre_case):
         if objects[i][3] == 1:
-            dessineCase(objects[i][0], objects[i][1],50,tc,"green")
+            dessineCase(objects[i][0], objects[i][1],50,t_case,"green")
+            update()
+
         else:
-            #drawLogos(objects[i][0], objects[i][1],50,objects[i][2],tc,"blue")
-            dessineCase(objects[i][0], objects[i][1],50,tc,"blue")
+            drawLogos(objects[i][0], objects[i][1],50,objects[i][2],t_case,objects[i][4])
+            update()
         update()
 
-def dessineCase(x,y,l,t,c="blue"):
+def dessineCase(x,y,l,t,c):
+    tracer(0)
     t.up()
     t.goto(x,y)
     t.down()
     t.color(c)
     t.setheading(0)
+    t.pensize(10)
     t.begin_fill()
     for i in range(2):
         t.forward(l*3)
@@ -105,15 +113,6 @@ def match_coords_with_index(objects,p_choix):
             p_index = i
     return p_index
 
-def printCoords(x,y):
-    print(f"x : {int(x)}, y : {int(y)}")
-
-def decor_click(x,y):
-    clearscreen()
-    decor()
-    panier(1180,10,Turtle(visible=True))
-    onscreenclick(printCoords)
-
 def eventClick(x,y):
     global clicked
     global p_choix
@@ -130,14 +129,15 @@ def eventClick(x,y):
         niveau = int(textinput("Level Selection :", "Quel niveau (1,2,3) :"))
         decor()
         objects = choose_objects()
-        make_figure(objects, t_case)
+        make_figure(objects)
         if niveau == 1:
             tentative = 40
         if niveau == 2:
             tentative = 30
         if niveau == 3:
-            tentative = 4
+            tentative = 20
         tentative_total = tentative
+        print(objects)
     else :
         if clicked > 0:
             if p_choix == 0:
@@ -164,26 +164,27 @@ def game(): # Fonction pour jouer
     i = len(objects)
     score_p = 0
     choix, choix2 = player_play(objects,p_choix,p_choix2)
-    t_case.clear()
     if tentative == 0:
         update_progressbar(tentative * 100 // tentative_total ,t_progressbar)
         onscreenclick(None)
         time.sleep(500)
         bye()
+    t_case.clear()
     if objects[choix][2] == objects[choix2][2]:
         objects[choix][3] = 0
         objects[choix2][3] = 0
-        make_figure(objects, t_case)
+        make_figure(objects)
         i = i - 2
         score_p += 1
     else:
         objects[choix][3] = 0
         objects[choix2][3] = 0
-        make_figure(objects,t_case)
-        time.sleep(3)
+        make_figure(objects)
+        t_case.clear()
+        time.sleep(5)
         objects[choix][3] = 1
         objects[choix2][3] = 1
-        make_figure(objects, t_case)
+        make_figure(objects)
         tentative -= 1
     update_progressbar(tentative * 100 // tentative_total ,t_progressbar)
     p_choix = 0
